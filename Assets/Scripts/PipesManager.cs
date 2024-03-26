@@ -20,6 +20,21 @@ public class PipesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (GameManager.instance.status)
+        {
+            case GameStatus.Start:
+                break;
+            case GameStatus.Play:
+                PlayUpdate();
+                break;
+            case GameStatus.GameOver:
+                break;
+        }
+       
+    }
+
+    public void PlayUpdate()
+    {
         currentTime += Time.deltaTime;
         if (currentTime > interval)
         {

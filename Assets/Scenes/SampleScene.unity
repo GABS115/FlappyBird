@@ -439,6 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
+  bird: {fileID: 541881065}
 --- !u!4 &724249621
 Transform:
   m_ObjectHideFlags: 0
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pipeModel: {fileID: 4872386002223467044, guid: 4a825c62573d8c541b4323a42e8a2688, type: 3}
   spawnPoint: {fileID: 668658312}
-  interval: 2.5
+  interval: 1.5
 --- !u!4 &2072894307
 Transform:
   m_ObjectHideFlags: 0

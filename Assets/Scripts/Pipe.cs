@@ -13,13 +13,29 @@ public class Pipe : MonoBehaviour
       
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        switch (GameManager.instance.status)
+        {
+            case GameStatus.Start:
+                break;
+            case GameStatus.Play:
+                PlayUpdate();
+                break;
+            case GameStatus.GameOver:
+                break;
+        }
+
+    }
+
+    // Update is called once per frame
+    void PlayUpdate()
     {
         
             transform.position += Vector3.left * Time.deltaTime * speed;
         if (transform.position.x < -2.9f)
         {
+            //autodestruir
             Destroy(gameObject);
         }
     }
