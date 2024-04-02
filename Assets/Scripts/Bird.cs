@@ -42,6 +42,7 @@ public class Bird : MonoBehaviour
     {
         rig.bodyType = RigidbodyType2D.Dynamic;
         Jump();
+        animator.SetBool("isAlive", true);
     }
     void StartUpdate()
     {
@@ -49,6 +50,7 @@ public class Bird : MonoBehaviour
         {
             //GameManager.instance.status = GameStatus.Play;
             GameManager.instance.StartGame();
+            
 
         }
 
