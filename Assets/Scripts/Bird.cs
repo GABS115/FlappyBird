@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -74,13 +75,24 @@ public class Bird : MonoBehaviour
 
     {
         GameOver();
-        
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameOver();
+        switch (collision.gameObject.layer)
+        {
+            case 6:
+                GameOver();
+                break;
+
+            case 7:
+                GameManager.instance.AddScore();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void GameOver()
