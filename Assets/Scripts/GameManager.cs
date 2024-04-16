@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameStatus status = GameStatus.Start;
+    public float speed;
 
     public Bird bird;
 
@@ -28,7 +29,12 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text scoreText;
 
+    public TMP_Text recordText;
     int score = 0;
+
+    private float gameOverTimer = 0f;
+    private string recordKey = "record";
+    private int record;
 
 
     private void Awake()
@@ -73,6 +79,10 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
         startImage.enabled = true;
         gameOverImage.enabled = false;
+        scoreText.enabled = false;
+        recordText.enabled = true;
+        record = PlayerPrefs.GetInt("record");
+        UpdateRecordText();
     }
 
     public void StartGame()
@@ -80,6 +90,8 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Play;
         bird.StartGame();
         startImage.enabled = false;
+        scoreText.enabled = true;
+        recordText.enabled = false;
        
 
     }
@@ -90,13 +102,27 @@ public class GameManager : MonoBehaviour
     {
         status = GameStatus.GameOver;
         gameOverImage.enabled = true;
+        scoreText.enabled = true;
+        recordText.enabled = true;
+        if(score > record)
+        {
+            record = score;
+            PlayerPrefs.SetInt(recordKey, record);
+            UpdateRecordText();
+        }
     }
 
     void GameOverUpdate()
     {
+        gameOverTimer += Time.deltaTime;
         if (Input.GetMouseButtonDown(0)) 
+
         {
+            if(gameOverTimer > 1.5)
+            {
+
             Restart();
+            }
         }
     }
 
@@ -110,6 +136,9 @@ public class GameManager : MonoBehaviour
         gameOverImage.enabled = false;
         score = 0;
         UpdateScoreText();
+        gameOverTimer = 0f;
+        scoreText.enabled = false;
+        recordText.enabled = true;
 
 
     }
@@ -125,4 +154,8 @@ public class GameManager : MonoBehaviour
         scoreText.text = $"Score: " + score.ToString();
     }
 
+    private void UpdateRecordText()
+    {
+        recordText.text = "Record: " + recordText.ToString();
+    }
 }

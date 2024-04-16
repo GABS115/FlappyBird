@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class Pipe : MonoBehaviour
+public class Ground : MonoBehaviour
 {
     // Start is called before the first frame update
-    
     void Start()
-
     {
-      
+        
     }
 
+    // Update is called once per frame
     void Update()
-    {
+
+    { 
         switch (GameManager.instance.status)
         {
             case GameStatus.Start:
@@ -24,19 +23,18 @@ public class Pipe : MonoBehaviour
                 break;
             case GameStatus.GameOver:
                 break;
+            default:
+                break;
         }
-
     }
 
-    // Update is called once per frame
-    void PlayUpdate()
+    private void PlayUpdate()
     {
-        
-            transform.position += Vector3.left * Time.deltaTime * GameManager.instance.speed;
-        if (transform.position.x < -2.9f)
+        transform.position += Vector3.left * GameManager.instance.speed * Time.deltaTime;
+
+        if (transform.position.x < -0.04f)
         {
-            //autodestruir
-            Destroy(gameObject);
+            transform.position += Vector3.right * 0.24f;
         }
     }
 }

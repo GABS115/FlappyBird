@@ -97,8 +97,13 @@ public class Bird : MonoBehaviour
 
     private void GameOver()
     {
+        if(GameManager.instance.status == GameStatus.GameOver)
+        {
+            return;
+        }
         GameManager.instance.GameOver();
         animator.SetBool("isAlive", false);
+        Jump();
     }
     void GameOverUpdate()
     {
