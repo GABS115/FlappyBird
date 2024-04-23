@@ -15,6 +15,7 @@ public enum GameStatus
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public InterstitialAdExample interstitialAdExample;
 
     public GameStatus status = GameStatus.Start;
     public float speed;
@@ -35,6 +36,13 @@ public class GameManager : MonoBehaviour
     private float gameOverTimer = 0f;
     private string recordKey = "record";
     private int record;
+
+
+    public void AddScore()
+    {
+        score++;
+        UpdateScoreText();
+    }
 
 
     private void Awake()
@@ -81,7 +89,7 @@ public class GameManager : MonoBehaviour
         gameOverImage.enabled = false;
         scoreText.enabled = false;
         recordText.enabled = true;
-        record = PlayerPrefs.GetInt("record");
+        record = PlayerPrefs.GetInt(recordKey);
         UpdateRecordText();
     }
 
@@ -143,19 +151,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AddScore()
-    {
-        score++;
-        UpdateScoreText();
-    }
-
     private void UpdateScoreText()
     {
-        scoreText.text = $"Score: " + score.ToString();
+        scoreText.text = $"Score: "+score.ToString();
     }
 
     private void UpdateRecordText()
     {
-        recordText.text = "Record: " + recordText.ToString();
+        recordText.text = $"Record: " +record.ToString();
     }
 }
